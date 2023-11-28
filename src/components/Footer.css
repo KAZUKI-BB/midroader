@@ -1,0 +1,12 @@
+footer{
+    height: 50px;
+    background-color: #fcbd15;
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.footer_logout{
+    align-self: center;
+    margin-right: 5px;  /* 右端から5pxの余白を設けます */
+}
