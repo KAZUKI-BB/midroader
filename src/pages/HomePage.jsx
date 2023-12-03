@@ -5,6 +5,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import {auth} from "../FirebaseConfig"
 /* ↓「useNavigate」,「Navigate」をimport */
 import { Navigate } from "react-router-dom";
+import Progress from "../components/Progress.jsx";
+import TimeTable from "../components/TimeTable.jsx";
 
 
 const Home = () => {
@@ -32,9 +34,8 @@ const Home = () => {
             <Navigate to={'/login/'} />
           ) : (
             <>
-              <h1>マイページ</h1>
-              {/* ↓ユーザーのメールアドレスを表示（ログインしている場合） */}
-              <p>{user?.email}</p>
+              <Progress/>
+              <TimeTable/>
             </>
           )}
         </>

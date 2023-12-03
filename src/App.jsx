@@ -11,8 +11,7 @@ const App = () => {
   return (
     <div className="flex-container">
       <BrowserRouter>
-        {/* Header コンポーネントを BrowserRouter 内部に移動 */}
-        <Header/>  
+        <Header/>
         <div className="container">
           <Routes>
             <Route path={`/register/`} element={<Register />} />
@@ -20,7 +19,6 @@ const App = () => {
             <Route path={`/`} element={<Home />} />
           </Routes>
         </div>
-        {/* Footer コンポーネントを BrowserRouter 内部に移動 */}
         <Footer/>
       </BrowserRouter>
     </div>

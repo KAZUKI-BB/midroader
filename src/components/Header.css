@@ -1,4 +1,18 @@
+body {
+    padding-top: 60px;
+}
+
 header{
-    height: 50px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 60px;
     background-color: #fcc05c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header_title{
+    color: #fff;
 }

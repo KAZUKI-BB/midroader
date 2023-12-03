@@ -43,11 +43,11 @@ const Login = () => {
         <Navigate to={'/'} />
       ):(
         <>
-          <h1>ログインページ</h1>
+          <h1>LoginPage</h1>
           {/* onSubmitを追加↓ */}
           <form onSubmit={handleSubmit}>
             <div>
-              <label>メールアドレス</label>
+              <label>Mail</label>
               {/* ↓「value」と「onChange」を追加 */}
               <input
                 name="email"
@@ -57,7 +57,7 @@ const Login = () => {
               />
             </div>
             <div>
-              <label>パスワード</label>
+              <label>Password</label>
               {/* ↓「value」と「onChange」を追加 */}
               <input
                 name="password"

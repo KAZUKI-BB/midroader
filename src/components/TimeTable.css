@@ -1,0 +1,31 @@
+.day_of_week{
+    margin-left: 30%;
+}
+
+.day_of_week ul{
+    justify-content: space-between;
+    display: flex;
+    margin-right: 1em;
+}
+
+.day_of_week ul li{
+    margin-left: 0.5em;
+}
+
+.day_of_week ul li input[type="radio"] {
+    appearance: none;
+    display: none;
+}
+
+.day_of_week ul li input[type="radio"]:checked + label {
+    background: #f8730e;
+    color: #fff;
+}
+
+.day_of_week ul li label {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}

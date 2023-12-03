@@ -1,10 +1,10 @@
 /* 「useState」と「useEffect」をimport↓ */
 import React, {useState, useEffect} from "react";
 /* 「onAuthStateChanged」,「signOut」と「auth」をimport↓ */
-import { onAuthStateChanged , signOut } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import {auth} from "../FirebaseConfig"
-/* ↓「useNavigate」,「Navigate」をimport */
-import { useNavigate, } from "react-router-dom";
+import { Link } from 'react-router-dom';
+
 import './Footer.css';
 
 const Footer = () => {
@@ -17,26 +17,14 @@ const Footer = () => {
     useEffect(() => {
       onAuthStateChanged(auth, (currentUser) =>{
         setUser(currentUser);
-        /* ↓追加 */
         setLoading(false);
       });
     },[]);
 
-    /* ↓「navigate」を定義 */
-    const navigate = useNavigate();
-
-    /* ↓関数「logout」を定義 */
-    const logout = async () => {
-        await signOut(auth);
-        navigate("/login/");
-    }
-
     return (
         <>
-          {/* ↓「loading」がfalseのときにマイページを表示する設定 */}
           {! loading && (
             <>
-              {/* ↓ログインしていない場合はログインページにリダイレクトする設定 */}
               {!user ? (
                 <>
                   <footer></footer>
@@ -44,7 +32,13 @@ const Footer = () => {
               ) : (
                 <>
                     <footer>
-                        <button onClick={logout} className="footer_logout">ログアウト</button>
+                      <div className="footer_nav">
+                        <ul>
+                          <li><Link to="#"><span className="material-icons" style={{ fontSize: "48px" }}>chat</span></Link></li>
+                          <li><Link to="#"><span className="material-icons" style={{ fontSize: "48px" }}>home</span></Link></li>
+                          <li><Link to="#"><span className="material-icons" style={{ fontSize: "48px" }}>account_circle</span></Link></li>
+                        </ul>
+                      </div>
                     </footer>
                 </>
               )}

@@ -59,3 +59,7 @@
     cursor: pointer;
     opacity: 0.7;
   }
+
+  ul{
+    list-style: none;
+  }
