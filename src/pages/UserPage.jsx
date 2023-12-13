@@ -1,56 +1,67 @@
-/* 「useState」と「useEffect」をimport↓ */
-import React, {useState, useEffect} from "react";
-/* 「onAuthStateChanged」,「signOut」と「auth」をimport↓ */
-import { onAuthStateChanged , signOut } from "firebase/auth";
-import {auth} from "../FirebaseConfig"
-/* ↓「useNavigate」,「Navigate」をimport */
-import { useNavigate, } from "react-router-dom";
-/* ↓Navigateをimport */
-import { Navigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../FirebaseConfig";
+import { useNavigate, Navigate } from "react-router-dom";
 import './UserPage.css';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../FirebaseConfig';
 
-const UserPage = () => {
-        /* ↓state変数「user」を定義 */
-        const [user, setUser] = useState("");
-        /* ↓state変数「loading」を定義 */
-        const[loading, setLoading] = useState(true);
+const User = () => {
+  const [user, setUser] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [zemi, setZemi] = useState("");
+  const [grade, setGrade] = useState("");
+  const [job, setJob] = useState("");
 
-        /* ↓ログインしているかどうかを判定する */
-        useEffect(() => {
-          onAuthStateChanged(auth, (currentUser) =>{
-            setUser(currentUser);
-            /* ↓追加 */
-            setLoading(false);
-          });
-        },[]);
+  useEffect(() => {
+    onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
 
-        /* ↓「navigate」を定義 */
-        const navigate = useNavigate();
+        const docRef = doc(db, 'users', currentUser.uid);
+        const docSnap = await getDoc(docRef);
 
-        /* ↓関数「logout」を定義 */
-        const logout = async () => {
-            await signOut(auth);
-            navigate("/login/");
+        if (docSnap.exists()) {
+          setZemi(docSnap.data().zemi);
+          setGrade(docSnap.data().grade);
+          setJob(docSnap.data().job);
+        } else {
+          console.log("No such document!");
         }
+      }
+      setLoading(false);
+    });
+  }, []);
 
-    return(
-      <>
-        {! loading && (
+  const navigate = useNavigate();
+
+  const logout = async () => {
+    await signOut(auth);
+    navigate("/login/");
+  }
+
+  return(
+    <>
+      {! loading && (
+        <>
+          {!user ? (
+            <Navigate to={'/login/'} />
+          ) : (
           <>
-            {!user ? (
-              <Navigate to={'/login/'} />
-            ) : (
-            <>
-              <h1>UserInfo</h1>
-              <p>Name: {user.displayName}</p>
-              <p>Email: {user.email}</p>
-              <button onClick={logout} className="footer_logout">ログアウト</button>
-            </>
-            )}
+            <h1>UserInfo</h1>
+            <p>Name: {user.displayName}</p>
+            <p>Email: {user.email}</p>
+            <p>ゼミ: {zemi}</p>
+            <p>学年: {grade}</p>
+            <p>目標の職業:{job}</p>
+            <button onClick={() => navigate('/user/edit')}>ユーザー情報編集</button>
+            <button onClick={logout} className="footer_logout">ログアウト</button>
           </>
-        )}
-      </>
-    );
+          )}
+        </>
+      )}
+    </>
+  );
 };
 
-export default UserPage;
+export default User;

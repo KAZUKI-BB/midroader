@@ -34,7 +34,7 @@ const Footer = () => {
                     <footer>
                       <div className="footer_nav">
                         <ul>
-                          <li><Link to="#"><span className="material-icons" style={{ fontSize: "48px" }}>chat</span></Link></li>
+                          <li><Link to="/chat/room1"><span className="material-icons" style={{ fontSize: "48px" }}>chat</span></Link></li>
                           <li><Link to="/"><span className="material-icons" style={{ fontSize: "48px" }}>home</span></Link></li>
                           <li><Link to="/user"><span className="material-icons" style={{ fontSize: "48px" }}>account_circle</span></Link></li>
                         </ul>

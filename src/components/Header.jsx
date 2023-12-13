@@ -4,7 +4,7 @@ const Header = () => {
     return (
       <>
         <header>
-          <h1 className="header_title">MIDROADER</h1>
+          <img src={process.env.PUBLIC_URL + '/mdrd_logo.png'} alt="mdrd_logo" />
         </header>
       </>
       );

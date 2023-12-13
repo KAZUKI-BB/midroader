@@ -1,5 +1,5 @@
 .day_of_week{
-    margin-left: 30%;
+    margin-left: 20%;
 }
 
 .day_of_week ul{
@@ -29,3 +29,22 @@
     cursor: pointer;
     transition: background 0.3s;
 }
+
+.timetable{
+    position: relative;
+}
+
+.term_toggle{
+    position: absolute;
+    margin-top: -10px;
+}
+
+.firstTerm {
+    background: #f7d2b0;
+    color: #ed3902;
+  }
+
+.secondTerm {
+    background: #ed3902;
+    color: #f7d2b0;
+  }

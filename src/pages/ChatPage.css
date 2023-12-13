@@ -1,0 +1,138 @@
+.balloon_l, .balloon_r {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin: 30px 0;
+  }
+
+  .balloon_r {
+    justify-content: flex-end;
+  }
+
+  .faceicon img {
+    width: 80px;
+    height: auto;
+  }
+
+  .balloon_r .faceicon {
+    order: 2 !important;
+    margin-left: 25px;
+  }
+
+  .balloon_l .faceicon {
+    margin-right: 25px;
+  }
+
+  .says {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 500px;
+    padding: 17px 13px 15px 18px;
+    margin: 0 !important;
+    font-size: 14px;
+    line-height: 20px; 
+    background: #fcbd15; 
+    border-radius: 12px;
+  }
+
+  .says{
+    color: #fff;
+  }
+    
+  .says p {
+
+    margin: 8px 0 0 !important;
+  }
+
+  .says p:first-child {
+    margin-top: 0 !important;
+  }
+
+  .says::after {
+    position: absolute;
+    content: '';
+    border: 10px solid transparent;
+  }
+
+  .balloon_l .says::after {
+    left: -26px;
+    border-right: 22px solid #fcbd15;
+  }
+
+  .balloon_r .says::after {
+    right: -26px;
+    border-left: 22px solid #fcbd15;
+  }
+
+  .chatform {
+    position: fixed;
+    bottom: 60px;
+    background-color: #fff;
+    width: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #ddd;
+    margin: 0 auto;
+  }
+
+  .chatform input[type='text'] {
+    width: 60%;
+    font-size: 13pt;
+    margin: 0 20px 0 20px;
+  }
+
+  .sendButton {
+    justify-self: center;
+    border: none;
+    background-color: #f8730e;
+    color: #fff;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  /* chatContainer for holding .chatLogContainer and .chatform with customized styles */
+  .chatContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+    max-width: 640px;
+    margin: 60px auto;
+  }
+
+  /* chatLogContainer custom style to center in screen */
+  .chatLogContainer {
+    position: fixed;
+    top: 60px;
+    bottom: 135px;
+    overflow-y: scroll; /* keep scroll but not display it */
+    overflow-x: hidden;
+    padding: 20px;
+    padding-bottom: 0;
+    box-sizing: border-box;
+    width: 84%;
+    margin: 0 auto;
+    -ms-overflow-style: none;  /* for IE and Edge */
+    scrollbar-width: none;  /* for Firefox */
+  }
+
+  .chatLogContainer::-webkit-scrollbar {
+    display: none; /* for Chrome and Safari */
+  }
+  
+  .chatLogContainer::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    border-radius: 4px;
+  }
+  
+  .chatLogContainer::-webkit-scrollbar-track {
+    background-color: white;
+  }
