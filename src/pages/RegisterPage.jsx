@@ -31,13 +31,36 @@ const Register = () => {
       );
       if(user){
         await updateProfile(auth.currentUser, { displayName: username });
+      
+        // ユーザー情報の保存
         await setDoc(doc(db, 'users', user.uid), {
           zemi: zemi,
           grade: grade,
           job: job,
           faculty: faculty
         });
-      } 
+
+        const initialTimeTable = {
+          first_semester: {
+            mon: {period_1: 0, period_2: 0, period_3: 0, period_4: 0, period_5: 0},
+            tue: {period_1: 0, period_2: 0, period_3: 0, period_4: 0, period_5: 0},
+            wed: {period_1: 0, period_2: 0, period_3: 0, period_4: 0, period_5: 0},
+            thu: {period_1: 0, period_2: 0, period_3: 0, period_4: 0, period_5: 0},
+            fri: {period_1: 0, period_2: 0, period_3: 0, period_4: 0, period_5: 0},
+            sat: {period_1: 0, period_2: 0, period_3: 0, period_4: 0, period_5: 0}
+          },
+          second_semester: {
+            mon: {period_1: 0, period_2: 0, period_3: 0, period_4: 0, period_5: 0},
+            tue: {period_1: 0, period_2: 0, period_3: 0, period_4: 0, period_5: 0},
+            wed: {period_1: 0, period_2: 0, period_3: 0, period_4: 0, period_5: 0},
+            thu: {period_1: 0, period_2: 0, period_3: 0, period_4: 0, period_5: 0},
+            fri: {period_1: 0, period_2: 0, period_3: 0, period_4: 0, period_5: 0},
+            sat: {period_1: 0, period_2: 0, period_3: 0, period_4: 0, period_5: 0}
+          }
+        };
+
+        await setDoc(doc(db, 'users', user.uid, 'UserTimetable', 'data'), initialTimeTable);
+      }
     } catch(error){
       alert("正しく入力してください");
     }
@@ -152,6 +175,7 @@ const Register = () => {
 };
 
 export default Register;
+
 
 
 
