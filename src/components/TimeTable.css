@@ -5,7 +5,17 @@
 .day_of_week ul{
     justify-content: space-between;
     display: flex;
-    margin-right: 1em;
+    margin-left: 30%;
+    margin-right: 0;
+    width: 70%;
+}
+
+@media screen and (max-width: 499px) {
+    .day_of_week ul{
+        margin-left: 0;
+        margin-right: 4.5em;
+        width: 100%;
+    }
 }
 
 .day_of_week ul li{
@@ -18,8 +28,12 @@
 }
 
 .day_of_week ul li input[type="radio"]:checked + label {
-    background: #f8730e;
-    color: #fff;
+    color: #ed3902;
+    font-weight: bold;
+    border-top: 2px solid gray;
+    border-left: 2px solid gray;
+    border-bottom: 0px solid gray;
+    border-right: 0px solid gray;
 }
 
 .day_of_week ul li label {
@@ -28,6 +42,9 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background 0.3s;
+    border-bottom: 3px solid gray;
+    border-right: 3px solid gray;
+    background-color: #f5f5f5;
 }
 
 .timetable{
@@ -40,13 +57,19 @@
 }
 
 .firstTerm {
-    background: #f7d2b0;
+    background-color: #f5f5f5;
     color: #ed3902;
+    font-weight: bold;
+    border-bottom: 3px solid gray;
+    border-right: 3px solid gray;
   }
 
 .secondTerm {
-    background: #ed3902;
-    color: #f7d2b0;
+    background-color: #f5f5f5;
+    color: #ed3902;
+    font-weight: bold;
+    border-top: 2px solid gray;
+    border-left: 2px solid gray;
   }
 
 .class_info{
@@ -71,32 +94,67 @@
 .class_time ul label{
     padding: 10px;
     font-size: 16px;
-    border-radius: 5px;
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
     cursor: pointer;
-    background: #fcbd15;
-    color: #fff;
+    color: #ed3902;
+    font-weight: bold;
 }
 
 .class_info{
     margin-left: 30px;
     width: 100%;
-    padding: 10px;
+    padding: 10px 0px 10px 10px;
     font-size: 16px;
-    border-radius: 5px;
-    background: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 2px solid gray;
 }
 
 .class_info p{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    width: 100%;
 }
 
 @media screen and (max-width: 499px) {
     .class_info p{
-        max-width: 10ch;
+        max-width: 22ch;
     }
+}
+
+.class_info button{
+    background-color:transparent;
+}
+
+.auto_button {
+    display: flex;
+    justify-content: right;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.auto_button button{
+    background: #fcbd15;
+    border-bottom: 3px solid gray;
+    border-right: 3px solid gray;
+}
+
+button:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.regi_button span{
+    color: #f8730e;
+}
+
+.function_btn:hover{
+    border-bottom: 0px solid gray;
+    border-right: 0px solid gray;
+    border-top: 2px solid gray;
+    border-left: 2px solid gray;
 }

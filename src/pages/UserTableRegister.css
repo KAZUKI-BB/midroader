@@ -1,15 +1,9 @@
-.function_btn{
-    justify-self: center;
-    border: none;
-    background-color: #f8730e;
-    color: #fff;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border-bottom: 3px solid gray;
-    border-right: 3px solid gray;
-  }
-  .footer_logout{
+.review-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
     justify-self: center;
     border: none;
     background-color: #f8730e;
@@ -29,3 +23,4 @@
     border-top: 2px solid gray;
     border-left: 2px solid gray;
   }
+

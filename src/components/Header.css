@@ -16,6 +16,7 @@ header{
 header img{
     width: 275px;
     height: 100%;
+    margin: auto;
 }
 
 .header_title{

@@ -1,6 +1,45 @@
-.progress_info{
-    width: 100%;
-    height: 250px;
-    border-radius: 5px;
-    background: #fff;
+.progress_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.progress_graph {
+  flex: 1;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 20px;
+}
+
+.progress_info {
+  flex: 1;
+  padding-left: 20px;
+}
+
+.progress_info .achievement_rate {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 499px) {
+  .progress_container {
+    flex-direction: column;
+  }
+
+  .progress_graph,
+  .progress_info {
+    flex: auto;
+  }
+
+  .progress_info {
+    padding-top: 20px;
+    text-align: center;
+  }
+
+  .progress_info .achievement_rate {
+    font-size: 48px;
+  }
 }

@@ -21,7 +21,8 @@ const User = () => {
         const docRef = doc(db, 'users', currentUser.uid);
         const docSnap = await getDoc(docRef);
 
-        if (docSnap.exists()) {
+        // Add additional check for currentUser inside the async function
+        if (currentUser && docSnap.exists()) {
           setZemi(docSnap.data().zemi);
           setGrade(docSnap.data().grade);
           setJob(docSnap.data().job);
@@ -54,7 +55,7 @@ const User = () => {
             <p>ゼミ: {zemi}</p>
             <p>学年: {grade}</p>
             <p>目標の職業:{job}</p>
-            <button onClick={() => navigate('/user/edit')}>ユーザー情報編集</button>
+            <button className="function_btn" onClick={() => navigate('/user/edit')}>ユーザー情報編集</button>
             <button onClick={logout} className="footer_logout">ログアウト</button>
           </>
           )}
@@ -65,3 +66,4 @@ const User = () => {
 };
 
 export default User;
+

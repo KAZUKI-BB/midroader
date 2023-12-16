@@ -1,0 +1,8 @@
+.auth_btn{
+    display: flex;
+}
+
+.user_operation{
+    display: flex;
+    flex-flow: column;
+}

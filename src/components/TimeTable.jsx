@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
+import { setDoc, doc, getDoc } from "firebase/firestore";
 import { db, auth } from "../FirebaseConfig";
 import { ClassInfoContext } from "../context/ClassInfo";
 import "./TimeTable.css";
@@ -20,6 +20,20 @@ const TimeTable = () => {
     "4": "thu",
     "5": "fri",
     "6": "sat",
+  };
+
+  const jobMapping = {
+    "1": "通信",
+    "2": "建設",
+    "3": "製造",
+    "4": "運輸",
+    "5": "電気ガス",
+    "6": "卸売小売",
+    "7": "金融",
+    "8": "保険",
+    "9": "不動産",
+    "10": "サービス",
+    "11": "公務員"
   };
 
   const navigate = useNavigate();
@@ -58,9 +72,55 @@ const TimeTable = () => {
     );
   };
 
+  const registerCompulsoryClass = async () => {
+    let compulsoryClasses = classInfo.filter((classItem) => classItem.class_type === 1);
+    const updates = [];
+  
+    compulsoryClasses.forEach((classItem) => {
+      const termString = termMapping[classItem.class_semester === 1];
+      const dayString = dayMapping[classItem.class_dow.toString()];
+      const periodString = `period_${classItem.class_time.toString()}`;
+  
+      if (!userTimetable[termString]) userTimetable[termString] = {};
+      if (!userTimetable[termString][dayString]) userTimetable[termString][dayString] = {};
+      userTimetable[termString][dayString][periodString] = classItem.class_id;
+  
+      const docRef = doc(db, 'users', auth.currentUser.uid, 'UserTimetable', 'data');
+      
+      updates.push(setDoc(docRef, userTimetable, { merge: true }));
+    });
+  
+    Promise.all(updates)
+      .then(() => window.location.reload())
+      .catch((error) => console.error("Error adding document: ", error));
+  };
+
+  const registerJobMatchingClasses = async () => {
+    const { job } = auth.currentUser;   // Fetch job from current auth user
+    let jobRelatedClasses = classInfo.filter((classItem) => classItem.class_prog === jobMapping[job]);
+    const updates = [];
+
+    jobRelatedClasses.forEach((classItem) => {
+      const termString = termMapping[classItem.class_semester === 1];
+      const dayString = dayMapping[classItem.class_dow.toString()];
+      const periodString = `period_${classItem.class_time.toString()}`;
+
+      if (!userTimetable[termString]) userTimetable[termString] = {};
+      if (!userTimetable[termString][dayString]) userTimetable[termString][dayString] = {};
+      userTimetable[termString][dayString][periodString] = classItem.class_id;
+
+      const docRef = doc(db, 'users', auth.currentUser.uid, 'UserTimetable', 'data');
+      
+      updates.push(setDoc(docRef, userTimetable, { merge: true }));
+    });
+
+    Promise.all(updates)
+      .then(() => window.location.reload())
+      .catch((error) => console.error("Error adding document: ", error));
+};
+
   return (
     <>
-      <h1>TimeTable</h1>
       <div className="timetable">
         <div className="term_toggle">
           <button
@@ -142,32 +202,36 @@ const TimeTable = () => {
           </ul>
         </div>
         <div className="class_time">
-          <ul>
-            {["1", "2", "3", "4", "5"].map((period) => {
-              const term = termMapping[isFirstTerm];
-              const day = dayMapping[selectedDay];
-              const classId = userTimetable[term]?.[day]?.[`period_${period}`];
-              const className = getClassName(classId);
-              return (
-                <li key={period}>
-                  <label>{period}</label>
-                  <div className="class_info">
-                    <p>{className}</p>
-                    <button
-                      onClick={() =>
-                        navigate("/usertableregister", {
-                          state: { term: isFirstTerm, day: selectedDay, period: period },
-                        })
-                      }
-                    >
-                      編集
-                    </button>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
+        <ul>
+          {["1", "2", "3", "4", "5"].map((period) => {
+            const term = termMapping[isFirstTerm];
+            const day = dayMapping[selectedDay];
+            const classId = userTimetable[term]?.[day]?.[`period_${period}`];
+            const className = getClassName(classId);
+            return (
+              <li key={period}>
+                <label>{period}</label>
+                <div className="class_info">
+                  <p>{className}</p>
+                  <button className="regi_button"
+                    onClick={() =>
+                      navigate("/usertableregister", {
+                        state: { term: isFirstTerm, day: selectedDay, period: period },
+                      })
+                    }
+                  >
+                    <span className="material-icons" style={{ fontSize: "24px" }}>edit</span>
+                  </button>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+        <div className="auto_button">
+          <button className="function_btn" onClick={registerCompulsoryClass}>必修一括登録</button>
+          <button className="function_btn" onClick={registerJobMatchingClasses}>目標参照登録</button>
         </div>
+      </div>
       </div>
     </>
   );

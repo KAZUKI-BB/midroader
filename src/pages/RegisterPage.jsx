@@ -79,10 +79,9 @@ const Register = () => {
         <Navigate to={`/`} />
       ) : (
         <>
-          <h1>NewUser</h1>
           <form onSubmit={handleSubmit}>
-            <div>
-              <label>UserName</label>
+            <div className="user_operation">
+              <label>ユーザー名</label>
               <input
                 name="username"
                 type="text"
@@ -90,7 +89,7 @@ const Register = () => {
                 onChange={(e) => setUsername(e.target.value)}
               />
             </div>
-            <div>
+            <div className="user_operation">
               <label>ゼミ</label>
               <select
                 value={zemi}
@@ -102,7 +101,7 @@ const Register = () => {
                 <option>ゼミ3</option>
               </select>
             </div>
-            <div>
+            <div className="user_operation">
               <label>学年</label>
               <select
                 value={grade}
@@ -114,7 +113,7 @@ const Register = () => {
                 <option>4</option>
               </select>
             </div>
-            <div>
+            <div className="user_operation">
               <label>目標の職業</label>
               <select
                 value={job}
@@ -134,7 +133,7 @@ const Register = () => {
                 <option>公務員</option>
               </select>
             </div>
-            <div>
+            <div className="user_operation">
               <label>学部・学科・コース</label>
               <select
                 value={faculty}
@@ -147,7 +146,7 @@ const Register = () => {
                 ))}
               </select>
             </div>
-            <div>
+            <div className="user_operation">
               <label>Email</label>
               <input
                 name="email"
@@ -156,7 +155,7 @@ const Register = () => {
                 onChange={(e) => setRegisterEmail(e.target.value)}
               />
             </div>
-            <div>
+            <div className="user_operation">
               <label>Password</label>
               <input
                 name="password"
@@ -165,8 +164,8 @@ const Register = () => {
                 onChange={(e) => setRegisterPassword(e.target.value)}
               />
             </div>
-            <button type="submit">Register</button>
-            <p>You have an account? <Link to={`/login/`}>Login</Link></p>
+            <button className="auth_btn" type="submit"><p>新規登録</p><span className="material-icons" style={{ fontSize: "24px" }}>login</span></button>
+            <p>アカウントをお持ちですか？ <Link to={`/login/`}>ログイン</Link></p>
           </form>
         </>
       )}

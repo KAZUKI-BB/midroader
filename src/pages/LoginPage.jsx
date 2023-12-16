@@ -6,6 +6,7 @@ import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../FirebaseConfig";
 /* ↓Navigate, Linkをimport */
 import { Navigate, Link } from "react-router-dom";
+import "./AuthPage.css";
 
 const Login = () => {
   /* ↓state変数を定義 */
@@ -43,10 +44,9 @@ const Login = () => {
         <Navigate to={'/'} />
       ):(
         <>
-          <h1>LoginPage</h1>
           {/* onSubmitを追加↓ */}
           <form onSubmit={handleSubmit}>
-            <div>
+            <div className="user_operation">
               <label>Mail</label>
               {/* ↓「value」と「onChange」を追加 */}
               <input
@@ -56,7 +56,7 @@ const Login = () => {
                 onChange={(e) => setLoginEmail(e.target.value)}
               />
             </div>
-            <div>
+            <div className="user_operation">
               <label>Password</label>
               {/* ↓「value」と「onChange」を追加 */}
               <input
@@ -66,7 +66,7 @@ const Login = () => {
                 onChange={(e) => setLoginPassword(e.target.value)}
               />
             </div>
-            <button>ログイン</button>
+            <button className="auth_btn"><p>ログイン</p><span className="material-icons" style={{ fontSize: "24px" }}>login</span></button>
             {/* ↓リンクを追加 */}
             <p>新規登録は<Link to={`/register/`}>こちら</Link></p>
           </form>

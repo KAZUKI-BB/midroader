@@ -13,8 +13,6 @@ import UserEdit from "./pages/UserEditPage";
 import ChatPage from "./pages/ChatPage";
 import UserTableRegister from "./pages/UserTableRegister";
 
-import TestPage from "./pages/TestPage";
-
 import './App.css';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -38,7 +36,6 @@ const App = () => {
                         <Route path={`/user/edit`} element={<UserEdit/>} />
                         <Route path={`/usertableregister`} element={<UserTableRegister/>} />
                         <Route path="/chat/:room" element={<ChatPage />} />
-                        <Route path="/testpage" element={<TestPage />} />
                       </Routes>
                     </div>
                   <Footer/>
